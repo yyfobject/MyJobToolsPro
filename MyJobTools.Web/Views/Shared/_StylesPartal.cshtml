@@ -1,0 +1,24 @@
+﻿@model string
+
+@{
+    //model 是引用的样式文件集合的key
+    //当前可选：LayUI
+    var keyUI = Model;
+    if (String.IsNullOrWhiteSpace(keyUI))
+    {
+        keyUI = "";
+    }
+
+}
+@switch (keyUI.ToLower())
+{
+    case "layui":
+        <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+        break;
+    case "vuejs":
+
+        break;
+    default:
+
+        break;
+}

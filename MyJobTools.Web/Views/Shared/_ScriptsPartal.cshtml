@@ -1,0 +1,27 @@
+﻿@model string
+
+@{
+    //model 是引用的脚本集合的key
+    //不输入则默认jquery
+    //当前可选：Juery+LayUI ， VueJS 
+
+    var keyUI = Model;
+    if (String.IsNullOrWhiteSpace(keyUI))
+    {
+        keyUI = "";
+    }
+}
+
+@switch (keyUI.ToLower())
+{
+    case "layui":
+        <script src="/layui/layui.js" charset="utf-8"></script>
+        break;
+    case "vuejs":
+        <script src="/Scripts/vue.min.js"></script>
+        break;
+    default:
+        <script src="/Scripts/jquery-1.10.2.min.js"></script>
+        break;
+}
+

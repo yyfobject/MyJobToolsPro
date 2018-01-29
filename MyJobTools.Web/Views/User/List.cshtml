@@ -1,0 +1,97 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+    var list = ViewBag.list as List<UserModel>;
+}
+
+
+<div id="app-7">
+    <ol>
+        <!--
+          现在我们为每个 todo-item 提供 todo 对象
+          todo 对象是变量，即其内容可以是动态的。
+          我们也需要为每个组件提供一个“key”，稍后再
+          作详细解释。
+        -->
+        <todo-item v-for="item in userList"
+                   v-bind:todo="item"
+                   v-bind:key="item.UserCode">
+        </todo-item>
+    </ol>
+    <button v-on:click="addUser">新增</button>
+</div>
+
+<form class="layui-form">
+    <div class="layui-panel-window">
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">搜索选择框</label>
+        <div class="layui-input-inline">
+            <select name="modules" lay-verify="required" lay-search="">
+                <option value="">直接选择或搜索选择</option>
+                <option style="max-width:500px;word-break:break-all;word-wrap:break-word;" value="1">yerlayerlayerlayerlayer,yerlayerlayeryerlayerlayeryerlayerlayeryerlayerlayer</option>
+                <option value="2">form</option>
+                <option value="3">layim</option>
+                <option value="4">element</option>
+                <option value="5">laytpl</option>
+                <option value="6">upload</option>
+                <option value="7">laydate</option>
+                <option value="8">laypage</option>
+                <option value="9">flow</option>
+                <option value="10">util</option>
+                <option value="11">code</option>
+                <option value="12">tree</option>
+                <option value="13">layedit</option>
+                <option value="14">nav</option>
+                <option value="15">tab</option>
+                <option value="16">table</option>
+                <option value="17">select</option>
+                <option value="18">checkbox</option>
+                <option value="19">switch</option>
+                <option value="20">radio</option>
+            </select>
+
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    @Html.Partial("~/Views/Shared/_ScriptsPartal.cshtml", "vuejs")
+    @Html.Partial("~/Views/Shared/_ScriptsPartal.cshtml", "LayUI")
+
+    <script>
+        var list = $.parseJSON('@Html.Raw(list.ToJson())');
+        var form;
+        layui.use('form', function () {
+            form = layui.form;
+            form.render();
+
+        });
+
+        $(function () {
+
+            Vue.component('todo-item', {
+                props: ['todo'],
+                template: '<li>{{ todo.UserName }}</li>'
+            });
+
+            var app7 = new Vue({
+                el: '#app-7',
+                data: {
+                    userList: list
+                },
+                methods: {
+                    addUser: function () {
+                        list.push({ 'UserName': '7777' });
+                    }
+
+                }
+            });
+
+    });
+    </script>
+}
+
+@section styles{
+    @Html.Partial("~/Views/Shared/_StylesPartal.cshtml", "LayUI")
+}
