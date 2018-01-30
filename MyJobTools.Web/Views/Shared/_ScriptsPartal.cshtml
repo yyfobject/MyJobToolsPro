@@ -3,7 +3,7 @@
 @{
     //model 是引用的脚本集合的key
     //不输入则默认jquery
-    //当前可选：Juery+LayUI ， VueJS 
+    //当前可选：Juery+LayUI ， VueJS
 
     var keyUI = Model;
     if (String.IsNullOrWhiteSpace(keyUI))
@@ -12,16 +12,33 @@
     }
 }
 
-@switch (keyUI.ToLower())
-{
-    case "layui":
-        <script src="/layui/layui.js" charset="utf-8"></script>
-        break;
-    case "vuejs":
-        <script src="/Scripts/vue.min.js"></script>
-        break;
-    default:
-        <script src="/Scripts/jquery-1.10.2.min.js"></script>
-        break;
-}
+<script src="~/Scripts/vue.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/layui/layui.js" charset="utf-8"></script>
+<script>
+    @*//注意：导航 依赖 element 模块，否则无法进行功能性操作*@
+    layui.use('element', function () {
+        var element = layui.element;
+        //…全局的layui处理
+    });
+    var searchList = [{ 'url': '', 'name': '1235' }, { 'url': '', 'name': '1234' }, { 'url': '', 'name': '6789' }];
+    var table1 = new Vue({
+        el: '#mainSearchList',
+        data: function () {
+            return { 'mainSearchList': searchList };
+        }
+    });
+</script>
+@*@switch (keyUI.ToLower())
+    {
+        case "layui":
+            <script src="/layui/layui.js" charset="utf-8"></script>
+            break;
+        case "vuejs":
+            <script src="/Scripts/vue.min.js"></script>
+            break;
+        default:
+            <script src="/Scripts/jquery-1.10.2.min.js"></script>
+            break;
+    }*@
 

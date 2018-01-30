@@ -192,6 +192,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\layui-site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -329,6 +330,7 @@
     <Content Include="Scripts\jquery.editableSelect.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\PageData.js" />
+    <Content Include="Scripts\vue.component.js" />
     <Content Include="Scripts\public.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -354,6 +356,8 @@
     <Content Include="Views\Shared\_MyLayout.cshtml" />
     <Content Include="Views\Shared\_StylesPartal.cshtml" />
     <Content Include="Views\Shared\_ScriptsPartal.cshtml" />
+    <Content Include="Views\Nav\_SideNavPartal.cshtml" />
+    <Content Include="Views\Nav\_UserNavPartal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
