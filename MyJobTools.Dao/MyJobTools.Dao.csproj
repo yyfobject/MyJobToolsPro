@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDao\SqlConnBase.cs" />
-    <Compile Include="BaseDao\Class1.cs" />
     <Compile Include="BaseDao\BaseDapperHelper.cs" />
     <Compile Include="BaseDao\BaseDaoConn.cs" />
     <Compile Include="UserDao.cs" />

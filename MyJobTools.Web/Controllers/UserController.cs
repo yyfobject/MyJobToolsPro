@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyJobTools.Library;
+using MyJobTools.Library.Extension;
 
 namespace MyJobTools.Web.Controllers
 {
@@ -33,6 +35,15 @@ namespace MyJobTools.Web.Controllers
             ViewBag.list = resultlist;
 
             return View();
+        }
+
+        public ActionResult GetList(UserQueryModel queryModel, PageQueryModel pageModel)
+        {
+            
+            UserDao dao = new UserDao();
+            var resultlist = dao.GetPage(queryModel, pageModel);
+
+            return Content(resultlist.ToJson());
         }
     }
 }
