@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BaseModel\AbsQueryBaseModel.cs" />
     <Compile Include="BaseModel\PageQueryModel.cs" />
+    <Compile Include="RespModel\LayRespModel.cs" />
     <Compile Include="UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

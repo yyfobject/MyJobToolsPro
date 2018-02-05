@@ -46,5 +46,14 @@ namespace MyJobTools.Web.Controllers
 
             return View();
         }
+
+        public ActionResult GetList(UserQueryModel queryModel, PageQueryModel pageModel)
+        {
+            
+            UserDao dao = new UserDao();
+            var resultlist = dao.GetPage(queryModel, pageModel);
+
+            return Content(resultlist.ToJson());
+        }
     }
 }
