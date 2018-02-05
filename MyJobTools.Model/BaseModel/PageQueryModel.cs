@@ -9,9 +9,9 @@ namespace MyJobTools.Model
 {
     public class PageQueryModel
     {
-        public int? Page { get; set; }
+        public int? page { get; set; }
 
-        public int? PageSize { get; set; }
+        public int? limit { get; set; }
 
         /// <summary>
         /// 可用来传递查询结果的总行数，不参与查询条件的逻辑
@@ -24,15 +24,21 @@ namespace MyJobTools.Model
         /// <returns></returns>
         public int GetStartRow()
         {
-            var _page = Page ?? 1;
-            var _pageSize = PageSize ?? 20;
+            var _page = page ?? 1;
+            var _pageSize = limit ?? 20;
             return (_page - 1) * _pageSize + 1;
         }
         public int GetEndRow()
         {
-            var _page = Page ?? 1;
-            var _pageSize = PageSize ?? 20;
+            var _page = page ?? 1;
+            var _pageSize = limit ?? 20;
             return _page * _pageSize;
+        }
+        public int GetSkip()
+        {
+            var _page = page ?? 1;
+            var _pageSize = limit ?? 20;
+            return (_page - 1) * _pageSize;
         }
     }
 }

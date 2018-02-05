@@ -1,10 +1,12 @@
-﻿using MyJobTools.Dao;
+﻿using MyJobTools.Bll;
 using MyJobTools.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyJobTools.Web.EF;
+using MyJobTools.Library.Extension;
 
 namespace MyJobTools.Web.Controllers
 {
@@ -20,8 +22,8 @@ namespace MyJobTools.Web.Controllers
             //list.Add(new UserModel { UserCode = "444", UserName = "4444" });
             //list.Add(new UserModel { UserCode = "555", UserName = "5555" });
             //list.Add(new UserModel { UserCode = "66", UserName = "6666" });
-            UserDao dao = new UserDao();
-            var resultlist = dao.GetPage(queryModel, pageModel);
+            //UserBll dao = new UserBll();
+            //var resultlist = dao.GetPage(queryModel, pageModel);
             //if (resultlist == null || resultlist.Count == 0)
             //{
             //    foreach (var item in list)
@@ -30,6 +32,16 @@ namespace MyJobTools.Web.Controllers
             //    }
             //    resultlist = list;
             //}
+            MyDBContext content = new MyDBContext();
+            List<User> resultlist;
+            if (queryModel.UserCode.IsNullOrWhiteSpace())
+            {
+                //resultlist= content.Users.Where(m => m.UserCode)
+            }
+            resultlist = content.Users.Where(m => queryModel.UserCode.IsNullOrWhiteSpace() || m.UserCode.Contains(queryModel.UserCode))
+                .Where(m => queryModel.UserName_Like.IsNullOrWhiteSpace() || m.UserName.Contains(queryModel.UserName_Like))
+                .Skip(pageModel.GetSkip()).Take(pageModel.limit ?? 20)
+                .ToList();
             ViewBag.list = resultlist;
 
             return View();
