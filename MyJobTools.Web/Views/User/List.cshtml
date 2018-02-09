@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = "~/Views/Shared/_MyLayout.cshtml";
-    var list = ViewBag.list as List<UserModel>;
+    var list = ViewBag.list as List<MyJobTools.Web.EF.User>;
 }
 
 
@@ -43,6 +43,7 @@
                 <th>用户名称</th>
                 <th>地址</th>
                 <th>生日</th>
+                <th>手机</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +53,7 @@
                 <td>{{ item.Address }}</td>
                 <td v-if="item.Birthday">{{ item.Birthday }}</td>
                 <td v-else> - </td>
+                <td>{{ item.Mobile }}</td>
             </tr>
         </tbody>
     </table>

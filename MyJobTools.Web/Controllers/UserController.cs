@@ -32,16 +32,28 @@ namespace MyJobTools.Web.Controllers
             //    }
             //    resultlist = list;
             //}
-            MyDBContext content = new MyDBContext();
+            
             List<User> resultlist;
             if (queryModel.UserCode.IsNullOrWhiteSpace())
             {
                 //resultlist= content.Users.Where(m => m.UserCode)
             }
-            resultlist = content.Users.Where(m => queryModel.UserCode.IsNullOrWhiteSpace() || m.UserCode.Contains(queryModel.UserCode))
-                .Where(m => queryModel.UserName_Like.IsNullOrWhiteSpace() || m.UserName.Contains(queryModel.UserName_Like))
-                .Skip(pageModel.GetSkip()).Take(pageModel.limit ?? 20)
-                .ToList();
+            //resultlist = content.Users.Where(m => queryModel.UserCode.IsNullOrWhiteSpace() || m.UserCode.Contains(queryModel.UserCode))
+            //    .Where(m => queryModel.UserName_Like.IsNullOrWhiteSpace() || m.UserName.Contains(queryModel.UserName_Like))
+            //    .Skip(pageModel.GetSkip()).Take(pageModel.Limit ?? 20)
+            //    .ToList();
+            //Expression<List<User >,bool> whereFilter = (List<User> list) => { list.Where(m => m.UserCode.Contains(queryModel.UserCode)).ToList(); };
+            using (MyDBContext content = new MyDBContext())
+            {
+                //resultlist = content.Users.GetPageQuery(
+                //    (User item) => item.UserCode.Contains(queryModel.UserCode), //where
+                //    (User item) => item.Id, //order by
+                //    true, pageModel
+                //    ).ToList();
+
+
+                resultlist = content.Users.Where(m => (queryModel.UserCode == null || m.UserCode.Contains(queryModel.UserCode)) && (queryModel.UserName_Like == null || m.UserName.Contains(queryModel.UserName_Like))).OrderBy(m => m.UserName).Skip(pageModel.GetSkip()).Take(pageModel.GetLimit()).ToList();
+            }
             ViewBag.list = resultlist;
 
             return View();
@@ -49,9 +61,9 @@ namespace MyJobTools.Web.Controllers
 
         public ActionResult GetList(UserQueryModel queryModel, PageQueryModel pageModel)
         {
-            
-            UserDao dao = new UserDao();
-            var resultlist = dao.GetPage(queryModel, pageModel);
+
+            UserBll uBll = new UserBll();
+            var resultlist = uBll.GetPage(queryModel, pageModel);
 
             return Content(resultlist.ToJson());
         }

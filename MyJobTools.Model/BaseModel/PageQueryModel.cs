@@ -24,21 +24,31 @@ namespace MyJobTools.Model
         /// <returns></returns>
         public int GetStartRow()
         {
-            var _page = page ?? 1;
-            var _pageSize = limit ?? 20;
+            var _page = Page ?? 1;
+            var _pageSize = Limit ?? 20;
             return (_page - 1) * _pageSize + 1;
         }
         public int GetEndRow()
         {
-            var _page = page ?? 1;
-            var _pageSize = limit ?? 20;
+            var _page = Page ?? 1;
+            var _pageSize = Limit ?? 20;
             return _page * _pageSize;
         }
         public int GetSkip()
         {
-            var _page = page ?? 1;
-            var _pageSize = limit ?? 20;
+            var _page = Page ?? 1;
+            var _pageSize = Limit ?? 20;
             return (_page - 1) * _pageSize;
+        }
+
+        public int GetLimit()
+        {
+            return Limit ?? 20;
+        }
+
+        public int GetPage()
+        {
+            return Page ?? 1;
         }
     }
 }

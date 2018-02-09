@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MyJobTools.Library;
+using MyJobTools.Web.EF;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -18,6 +21,12 @@ namespace MyJobTools.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Log.Register();
+            //LogHelper.
+
+
+            Database.SetInitializer<MyDBContext>(null);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MyJobTools.Dao
         {
             BaseDapperHelper dbHelper = new BaseDapperHelper("DefualtConn");
             //return dbHelper.GetPageFromTable<UserModel>("User", queryModel, pageModel).ToList();
-            string sql = String.Format("select * from User where 1=1 {0} {1} limit @EndRow-@StartRow offset @StartRow;", queryModel.GetWhereFormat(), queryModel.GetOrderBy());
+            string sql = String.Format("select * from User where 1=1 {0} {1} limit @Limit offset @Page;", queryModel.GetWhereFormat(), queryModel.GetOrderBy());
             string sqlCount = String.Format("select count(1) RowsCount from User where 1=1 {0} ", queryModel.GetWhereFormat());
             return dbHelper.GetPage<UserModel>(sql, sqlCount, queryModel, pageModel).ToList();
         }

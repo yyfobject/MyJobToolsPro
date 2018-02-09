@@ -75,8 +75,8 @@ namespace MyJobTools.Dao.BaseDao
         public IEnumerable<T> GetPage<T>(string sql, string sqlCount, AbsQueryBaseModel queryModel, PageQueryModel pageModel)
         {
             DynamicParameters pars = new DynamicParameters(queryModel);
-            pars.Add("Page", pageModel.Page, DbType.Int32);
-            pars.Add("Limit", pageModel.Limit, DbType.Int32);
+            pars.Add("Page", pageModel.GetPage(), DbType.Int32);
+            pars.Add("Limit", pageModel.GetLimit(), DbType.Int32);
             //pars.Add("RowsCount", pageModel.RowsCount, DbType.Int32, ParameterDirection.Output);
             var list = dbCnn.Query<T>(sql, pars, null, true, TimeOut);
             pageModel.RowsCount = dbCnn.ExecuteScalar<int>(sqlCount, pars, null, TimeOut);
